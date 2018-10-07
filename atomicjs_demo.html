@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Atomic.js</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+
+</head>
+
+<body>
+  <canvas id="c"></canvas>
+
+
+  <!-- scripts -->
+  <script src="./assets/lib/atomic.js"></script>
+
+
+  <script>
+    // AtomicJS Setup
+    const atomic = new Atomic('#c', window.innerWidth, window.innerHeight-30, 0.8, 1, 10);
+    let ctx = atomic.ctx;
+
+    // setup init
+    function init() {
+
+      for (let i = 0; i < 50; i++) {
+        let randCol = 'hsl(' + Math.random() * 360 + 'deg, 50%,50%)';
+
+        atomic.Poly.box(200, Math.random() * 200, 20, 20, {
+          render: { fillStyle: randCol }
+        });
+
+      }
+
+      // atomic.Poly.circle(Math.random() * atomic.width, 300, 40, 24, 1);
+      atomic.Poly.triangle(atomic.canvas.width - 550, 200, 100, 100, {
+        static: true,
+        render: {
+          fillStyle: 'green',
+        }
+      });
+      atomic.Poly.triangle(atomic.canvas.width - 400, 200, 100, 100, {
+        static: true,
+        render: {
+          fillStyle: 'red'
+        }
+      });
+
+      atomic.Poly.box(350, 200, 200, 20, {
+        static: true,
+        render: { fillStyle: 'tomato' }
+      });
+    }
+    init();
+
+
+    // animate loop
+    function animate() {
+      atomic.frame(animate);
+
+      atomic.update();
+
+      atomic.render();
+
+      // atomic.Render.information();
+
+      atomic.drag();
+    }
+    animate();
+
+  </script>
+</body>
+
+</html>

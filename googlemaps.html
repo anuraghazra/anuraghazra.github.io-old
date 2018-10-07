@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Location</title>
+
+  <style>
+    body,
+    html {
+      margin: 0;
+    }
+
+    #googleMap {
+      margin: 0 auto;
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPhp9N5D-eM-1ZWWL-BFup_5lSUJ2qSDA&callback=myMap"></script>
+
+</head>
+
+<body>
+
+  <div id="googleMap"></div>
+
+  <script>
+    window.onload = function () {
+      function myMap() {
+        var myLatlng = new google.maps.LatLng(22.600630, 88.337068);
+        var myOptions = {
+          zoom: 18,
+          center: myLatlng,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        // 22.600633,88.3362248,319
+
+        var map = new google.maps.Map(document.getElementById("googleMap"), myOptions);
+        var marker = new google.maps.Marker({
+          position: map.getCenter(),
+          icon: {
+            path: google.maps.SymbolPath.CIRCLE,
+            scale: 5
+          },
+          draggable: false,
+          map: map
+        });
+      }
+      myMap();
+    }
+  </script>
+</body>
+
+</html>
