@@ -1041,3 +1041,10 @@ section.intro {
   overflow: hidden;
   height: 500px;
 }
+
+#console {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  pointer-events: none;
+}

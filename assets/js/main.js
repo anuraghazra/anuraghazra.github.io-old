@@ -1,4 +1,8 @@
 $(document).ready(function () {
+  
+  // !
+  // ! Navigation 
+  // !
 
   $('.navigation').addClass('animated fadeInDown');
 
@@ -47,6 +51,9 @@ $(document).ready(function () {
   $.scrollzer(ids, { pad: 200, lastHack: true });
 
 
+  // !
+  // ! Animations 
+  // !
 
   /**
    * @class Animate
@@ -82,7 +89,7 @@ $(document).ready(function () {
           e.classList.add('delay-' + i + 's');
         }
         if (delay !== undefined) {
-          window.setTimeout(function() {
+          window.setTimeout(function () {
             that.addAnimate(e);
           }, delay)
         } else {
@@ -101,10 +108,16 @@ $(document).ready(function () {
   new Animate('.avatar.avatar-port', 'zoomIn', 0).run();
   new Animate('.showcase:nth-child(even)', 'fadeInRight', 0).run();
   new Animate('.showcase:nth-child(odd)', 'fadeInLeft', 0).run();
-  new Animate('.funwithcanvas .fwc', 'zoomIn', 0).run(false, 1500);
+  new Animate('.funwithcanvas .fwc', 'zoomIn', 0).run(false, 500);
   new Animate('.cv-container', 'zoomIn', 0).run();
 
 
+
+
+
+  // !
+  // ! Lazy Loading 
+  // !
   // TODO : FIX LazzyLoading
   // LazzyLoading
   lazyLoadImg();
@@ -116,24 +129,23 @@ $(document).ready(function () {
       if (mainsrc && img.src !== mainsrc) {
         imgs[i].classList.add('hidden');
       }
-      
+
       // when image is in view
       if (inView(imgs[i])) {
         if (mainsrc && img.src !== mainsrc) {
           imgs[i].parentElement.classList.add('loading');
         }
         // window.setTimeout(function () {
-          if (mainsrc) {
-            img.src = mainsrc;
-            img.onload = function () {
-              imgs[i].setAttribute('src', img.src);
-              imgs[i].removeAttribute('data-src');
-              imgs[i].classList.remove('hidden');
-              imgs[i].parentElement.classList.remove('loading');
-            }
+        if (mainsrc) {
+          img.src = mainsrc;
+          img.onload = function () {
+            imgs[i].setAttribute('src', img.src);
+            imgs[i].removeAttribute('data-src');
+            imgs[i].classList.remove('hidden');
+            imgs[i].parentElement.classList.remove('loading');
           }
+        }
         // }, 800);
-
       }
     }
   }
@@ -160,7 +172,6 @@ $(document).ready(function () {
           }
         }
       }
-
     }
   }
   function inView(elm) {
@@ -181,7 +192,9 @@ $(document).ready(function () {
   });
 
 
-  // lightbox
+  // !
+  // ! LightBox
+  // !
   let overlay = document.querySelector('.overlay-preview');
   let overlayimg = document.querySelector('#overlay-preview-img');
   let close = document.querySelector('.close');
@@ -221,18 +234,58 @@ $(document).ready(function () {
   close.onclick = function () {
     overlay.classList.remove('show');
   }
-  let img_zoom = 50;
-  overlay.addEventListener('mousewheel', function (e) {
-    e.preventDefault();
-    if (e.wheelDeltaY > 0) {
-      img_zoom += 5;
-    } else if (e.wheelDeltaY < 0) {
-      img_zoom -= 5;
-    }
-    overlayimg.style.width = img_zoom + '%'
-  })
+  
 
 
+  // zoom
+  pinch();
+  function pinch() {
+    let zoomScale = 50;
+    let pinchScale = null;
+    let lastPinchScale = null;
+
+    overlay.addEventListener('mousewheel', function (e) {
+      e.preventDefault();
+      if (e.wheelDeltaY > 0) {
+        zoomScale += 5;
+      } else if (e.wheelDeltaY < 0) {
+        zoomScale -= 5;
+      }
+      overlayimg.style.width = zoomScale + '%'
+    });
+
+    overlay.addEventListener('touchmove', function (e) {
+      if (e.touches.length !== 2) return;
+      let p1x = e.touches[0].pageX;
+      let p1y = e.touches[0].pageY;
+      let p2x = e.touches[1].pageX;
+      let p2y = e.touches[1].pageY;
+  
+      let x = (p2x - p1x);
+      let y = (p2y - p1y);
+
+      pinchScale = Math.sqrt(x * x + y * y);
+      let diff = pinchScale - lastPinchScale;
+
+      if (diff > 0) {
+        zoomScale += 5;
+      } else {
+        zoomScale -= 5;
+      }
+  
+      overlayimg.style.width = zoomScale + '%';
+  
+      lastPinchScale = pinchScale;
+    });
+  }
+  
+
+
+  // !
+  // !Font Loading 
+  // !
+  
+  
   // document.fonts.ready.then(function() {
   //   alert('ok')
   // })  
@@ -253,12 +306,11 @@ $(document).ready(function () {
       node.style.visibility = 'hidden';
       document.body.appendChild(node);
       var off_width = node.offsetWidth;
-      
+
       node.style.fontFamily = fonts[i];
-      
+
       let timer;
       function checkFont() {
-        console.log('oaak')
         if (node && node.offsetWidth !== off_width) {
           ++loadedfonts;
           if (loadedfonts == fonts.length) {
@@ -280,7 +332,7 @@ $(document).ready(function () {
   });
 
 
-  window.addEventListener('mousewheel', function(e) {
+  window.addEventListener('mousewheel', function (e) {
     console.log(e.deltaY)
     let nav = document.querySelector('.navigation');
     if (e.deltaY >= 0) {
@@ -289,5 +341,5 @@ $(document).ready(function () {
       nav.classList.remove('shrink-nav');
     }
   })
-  
+
 })
