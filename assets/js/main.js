@@ -106,14 +106,55 @@ $(document).ready(function () {
   new Animate('.cards-container .card', 'zoomIn', 0).run(true);
   new Animate('.pgh-about-me', 'fadeInRight', 0).run();
   new Animate('.avatar.avatar-port', 'zoomIn', 0).run();
-  new Animate('.showcase:nth-child(even)', 'fadeInRight', 0).run();
-  new Animate('.showcase:nth-child(odd)', 'fadeInLeft', 0).run();
+
   new Animate('.funwithcanvas .fwc', 'zoomIn', 0).run(false, 500);
   new Animate('.cv-container', 'zoomIn', 0).run();
 
 
 
+  let dynamicworks = document.getElementById('dynamic-load-works');
+  let doneDynamic = false;
+  $.getJSON('/assets/dynamic/works.json', function (data) {
+    for (let i = 0; i < data.length; i++) {
+      let pushl5 = '';
+      let pulll7 = '';
+      if (i % 2) { 
+        pushl5 = 'push-l5'
+        pulll7 = 'pull-l7';
+      }
+      dynamicworks.innerHTML += 
+      `
+      <figure class="row showcase">
+        <section class="col l7 s12 ${pushl5}">
+          <div class="browser-window">
+            <div class="fake-nav">
+              <i></i><i></i><i></i>
+            </div>
+            <img class="thumbnail" data-src="${data[i].links.image}" alt="${data[i].title}">
+          </div>
+        </section>
 
+        <section class="col l5 s12 ${pulll7}">
+          <div class="work-brief">
+            <h2 class="sub-title">${data[i].title}</h2>
+            <p class="pgh-work-info">${data[i].brief}</p>
+            <div class="work-links-panel">
+              <div class="panel-icons row">
+                <a href="https://github.com/anuraghazra"><i class="col s4 fa fa-2x fa-github"></i></a>
+                <a download href="${data[i].links.image}"><i class="col s4 fa fa-2x fa-download"></i></a>
+                <a href="https://github.com/anuraghazra"><i class="col s4 fa fa-2x fa-share"></i></a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </figure>
+      `
+    }
+
+    doneDynamic = true;
+    new Animate('.showcase:nth-child(even)', 'fadeInRight', 0).run();
+    new Animate('.showcase:nth-child(odd)', 'fadeInLeft', 0).run();
+  });
 
   // !
   // ! Lazy Loading 
@@ -198,7 +239,7 @@ $(document).ready(function () {
   let overlay = document.querySelector('.overlay-preview');
   let overlayimg = document.querySelector('#overlay-preview-img');
   let close = document.querySelector('.close');
-  let previewImgs = document.querySelectorAll('.thumbnail');
+  let dynamic = document.getElementById('dynamic-load-works');
 
   let isDown = false;
   let offset = { x: 0, y: 0 };
@@ -223,13 +264,13 @@ $(document).ready(function () {
   overlay.addEventListener('touchend', function (e) { isDown = false });
   overlay.addEventListener('touchmove', moveDrag);
 
-  for (let i = 0; i < previewImgs.length; i++) {
-    let pi = previewImgs[i];
-    pi.onclick = function () {
+
+  dynamic.addEventListener('click', function(e) {
+    if (e.target.className.match('thumbnail')) { 
       overlay.classList.add('show');
-      overlayimg.src = pi.src;
+      overlayimg.src = e.target.src;
     }
-  }
+  })
 
   close.onclick = function () {
     overlay.classList.remove('show');
@@ -328,12 +369,11 @@ $(document).ready(function () {
 
 
   isFontLoaded(['Lobster'], function (e) {
-    document.querySelector('.pre-loading').classList.add('pre-loading__hide');
+    doneDynamic && document.querySelector('.pre-loading').classList.add('pre-loading__hide');
   });
 
 
   window.addEventListener('mousewheel', function (e) {
-    console.log(e.deltaY)
     let nav = document.querySelector('.navigation');
     if (e.deltaY >= 0) {
       nav.classList.add('shrink-nav');

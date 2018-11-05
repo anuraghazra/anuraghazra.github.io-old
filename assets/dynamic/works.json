@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Neon Design",
+    "brief": "One Of My site which uses css3 animations with great easeing animation gives the user a subtle feedback which improves User Experience",
+    "links": {
+      "image": "./assets/img/Neon Design-min.png",
+      "github": "https://github.com/anuraghazra"
+    }
+  },
+  {
+    "title": "Web Folio",
+    "brief": "My Old Portfolio Site. Its Uses SVG Animation For Those Good Looking Animations. And It Uses Highcharts To Make Skill Graphs And Drilldown Mehtod For Making Them Responsive To User",
+    "links": {
+      "image": "./assets/img/WebDevFolio-min.png",
+      "github": "https://github.com/anuraghazra"
+    }
+  },
+  {
+    "title": "Iconic Festivals",
+    "brief": "Iconic Festivals is my final year project at Ramakrishna Mission Shilpamandira, I worked hard at a very steep deadline with this project and made this a great responsive mobile friendly website on its own",
+    "links": {
+      "image": "./assets/img/Final Web Template-min.png",
+      "github": "https://github.com/anuraghazra"
+    }
+  },
+  {
+    "title": "Save Tigers Template",
+    "brief": "One of my web templates which is designed with the mindset of saving bengal tigers in india. and we sould save tigers because if we dont stand for them they will not survive.",
+    "links": {
+      "image": "./assets/img/SaveTiges-min.jpg",
+      "github": "https://github.com/anuraghazra"
+    }
+  },
+  {
+    "title": "GreenVeg.in Template",
+    "brief": "GreenVeg.in is a 'Live A Green Life' template focusing on saving nature. this template can be used as a boilerplate to organizations which can make a defference. ",
+    "links": {
+      "image": "./assets/img/GreenVeg-min.jpg",
+      "github": "https://github.com/anuraghazra"
+    }
+  }
+]
