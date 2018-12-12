@@ -368,7 +368,7 @@ $(document).ready(function () {
   }
 
 
-  isFontLoaded(['Lobster'], function (e) {
+  isFontLoaded(['Lobster', 'Muli'], function (e) {
     doneDynamic && document.querySelector('.pre-loading').classList.add('pre-loading__hide');
   });
 

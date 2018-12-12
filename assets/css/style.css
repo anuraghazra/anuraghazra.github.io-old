@@ -14,15 +14,6 @@
   box-sizing: border-box;
 }
 
-@font-face {
-  font-family: 'Lobster';
-  src: url(../css/Lobster-Regular.ttf);
-}
-/* @font-face {
-  font-family: 'Century Gothic';
-  src: url(../css/GOTHIC.ttf)
-} */
-
 body, html {
   margin: 0 auto;
   padding: 0;
@@ -164,7 +155,7 @@ nav.navigation {
   }
 
   .site-title {
-    font-family : 'Lobster';
+    font-family: 'Lobster', cursive;
     color: #e37682;
     background: linear-gradient(45deg, #a58fe9, #e37682);
     -webkit-background-clip: text;
@@ -235,7 +226,7 @@ section {
 
 
 .sub-title {
-  font-family: 'Lobster' !important;
+  font-family: 'Lobster', cursive !important;
   font-weight: 100 !important;
   font-size: 30px;
   text-align: center
@@ -291,7 +282,7 @@ section.intro {
 
     div.intro-text {
       margin: auto;
-      font-family: 'Lobster';
+      font-family: 'Lobster', cursive;
       font-size: 36px;
       line-height: 15px;
       text-align: left;
