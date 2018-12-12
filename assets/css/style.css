@@ -18,19 +18,16 @@
   font-family: 'Lobster';
   src: url(../css/Lobster-Regular.ttf);
 }
-@font-face {
+/* @font-face {
   font-family: 'Century Gothic';
-  src: 
-  url(../css/GOTHIC.ttf),
-  url(../css/GOTHICB.TTF),
-  url(../css/GOTHICBI.TTF),
-  url(../css/GOTHICI.TTF);
-}
+  src: url(../css/GOTHIC.ttf)
+} */
 
 body, html {
   margin: 0 auto;
   padding: 0;
-  font-family: 'Century Gothic';
+  font-family: 'Muli', sans-serif;
+  /* font-family: 'Century Gothic'; */
 }
 
 body {
@@ -560,7 +557,8 @@ section.intro {
 
 .pgh-work-info p {
   display: block;
-  min-height: 100px
+  min-height: 100px;
+  color : #252525;
 }
 .pgh-work-info {
   min-height: 250px;
