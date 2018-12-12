@@ -2,9 +2,6 @@
   body {
     background-image: url(../img/overlay2.svg), linear-gradient(#e37682, #5f4d93);
   }
-  .wrapper {
-    margin: 0 10px;
-  }
 
   .browser-window {
     max-width: 100%;
@@ -17,12 +14,40 @@
     width: 100%;
   }
 
+  /* .showcase {
+    height: fit-content;
+  } */
   .showcase section.col {
     margin: 20px;
   }
   .showcase .work-brief {
-    height: 250px;
-    max-height: 350px;
+    height: fit-content;
+  }
+
+  .side-projects-ul {
+    line-height: 30px;
+  }
+
+  .bg-white {
+    padding: 20px 10px 50px 10px;
+  }
+
+  .purple-border {
+    padding: 0px;
+  }
+
+  .smallbox {
+    margin: 50px 0 0 0;
+    padding: 10px !important;
+  } 
+  .small-works  {
+    margin: 50px 0 0 0;
+    padding: 0 !important;
+    height: fit-content;
+    display: block;
+  }
+  .pgh-work-info {
+    min-height: 100%;
   }
 
 

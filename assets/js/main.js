@@ -140,7 +140,7 @@ $(document).ready(function () {
             <p class="pgh-work-info">${data[i].brief}</p>
             <div class="work-links-panel">
               <div class="panel-icons row">
-                <a href="https://github.com/anuraghazra"><i class="col s4 fa fa-2x fa-github"></i></a>
+                <a href="https://github.com/anuraghazra"><i class="col s4 fab fa-2x fa-github"></i></a>
                 <a download href="${data[i].links.image}"><i class="col s4 fa fa-2x fa-download"></i></a>
                 <a href="https://github.com/anuraghazra"><i class="col s4 fa fa-2x fa-share"></i></a>
               </div>
