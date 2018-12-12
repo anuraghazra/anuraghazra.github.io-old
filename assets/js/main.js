@@ -329,7 +329,7 @@ $(document).ready(function () {
   
   // document.fonts.ready.then(function() {
   //   alert('ok')
-  // })  
+  // })
   function isFontLoaded(fonts, callback) {
     let loadedfonts = 0;
     for (let i = 0; i < fonts.length; i++) {
@@ -350,26 +350,26 @@ $(document).ready(function () {
 
       node.style.fontFamily = fonts[i];
 
-      let timer;
+      let timeInter = window.setInterval(checkFont, 150);
+
       function checkFont() {
+        if (loadedfonts == fonts.length) {
+          window.clearInterval(timeInter);
+          node = null;
+          callback(true);
+        }
         if (node && node.offsetWidth !== off_width) {
-          ++loadedfonts;
-          if (loadedfonts == fonts.length) {
-            callback(true);
-            timer = window.clearInterval(timer);
-          }
+          loadedfonts++;
           node.parentNode.removeChild(node);
           node = null;
-          return true;
         }
       }
-      timer = window.setInterval(checkFont, 150);
     }
   }
 
 
   isFontLoaded(['Lobster', 'Muli'], function (e) {
-    doneDynamic && document.querySelector('.pre-loading').classList.add('pre-loading__hide');
+    if (e == true) document.querySelector('.pre-loading').classList.add('pre-loading__hide');
   });
 
 
