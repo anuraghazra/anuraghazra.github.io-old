@@ -3,7 +3,6 @@ $(document).ready(function () {
   // !
   // ! Navigation 
   // !
-
   $('.navigation').addClass('animated fadeInDown');
 
   // Mobile Nav
@@ -18,38 +17,43 @@ $(document).ready(function () {
 
 
   // Scrolly-fy links.
-  var nav_items = $('.nav-items li a');
-  $('.find-more').scrolly();
+  // var nav_items = $('.nav-items li a');
+  // $('.find-more').scrolly();
 
 
-  // $('.parallax').scrolly({bgParallax: true});
-  //<div class="parallax" data-velocity="-.3"></div>
-  //<div class="parallax" data-velocity="-.1"></div>
-  //<div class="parallax" data-velocity="-.5" data-fit="525"></div>
+  // // $('.parallax').scrolly({bgParallax: true});
+  // //<div class="parallax" data-velocity="-.3"></div>
+  // //<div class="parallax" data-velocity="-.1"></div>
+  // //<div class="parallax" data-velocity="-.5" data-fit="525"></div>
 
-  nav_items.scrolly({ timingFunction: 'linear', speed: 800 }).on('click', function (e) {
-    e.preventDefault();
-    let t = $(this),
-      href = t.attr('href');
+  // nav_items.scrolly({ timingFunction: 'linear', speed: 800 }).on('click', function (e) {
+  //   e.preventDefault();
+  //   let t = $(this),
+  //     href = t.attr('href');
 
-    if (href[0] != '#') { return; }
+  //   if (href[0] != '#') { return; }
 
-    // Clear active and lock scrollzer until scrolling has stopped
-    nav_items.removeClass('active');
+  //   // Clear active and lock scrollzer until scrolling has stopped
+  //   nav_items.removeClass('active');
 
-    // Set this link to active
-    t.addClass('active');
-  });
+  //   // Set this link to active
+  //   t.addClass('active');
+  // });
 
   // Initialize scrollzer.
-  let ids = [];
-  nav_items.each(function () {
-    let href = $(this).attr('href');
-    if (href[0] != '#') { return; }
-    ids.push(href.substring(1));
-  });
-  $.scrollzer(ids, { pad: 200, lastHack: true });
+  // let ids = [];
+  // nav_items.each(function () {
+  //   let href = $(this).attr('href');
+  //   if (href[0] != '#') { return; }
+  //   ids.push(href.substring(1));
+  // });
+  // console.log(ids)
+  // $.scrollzer(ids, { pad: 200, lastHack: true });
 
+  $('.navigation').navScroll({
+    scrollSpy: true,
+    navHeight: 100
+  });
 
   // !
   // ! Animations 
@@ -85,7 +89,7 @@ $(document).ready(function () {
     function checkPos() {
       for (let i = 0; i < that.element.length; i++) {
         const e = that.element[i];
-        if (isGroup) {
+        if (isGroup && !(window.innerWidth < 400)) {
           e.classList.add('delay-' + i + 's');
         }
         if (delay !== undefined) {
@@ -114,7 +118,9 @@ $(document).ready(function () {
 
   let dynamicworks = document.getElementById('dynamic-load-works');
   let doneDynamic = false;
-  $.getJSON('/assets/dynamic/works.json', function (data) {
+  fetch('/assets/dynamic/works.json')
+  .then(res => res.json())
+  .then(data => {
     for (let i = 0; i < data.length; i++) {
       let pushl5 = '';
       let pulll7 = '';
@@ -154,7 +160,8 @@ $(document).ready(function () {
     doneDynamic = true;
     new Animate('.showcase:nth-child(even)', 'fadeInRight', 0).run();
     new Animate('.showcase:nth-child(odd)', 'fadeInLeft', 0).run();
-  });
+  })
+  .catch(err => console.log);
 
   // !
   // ! Lazy Loading 

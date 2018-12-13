@@ -10,6 +10,11 @@
 
 /* Generic */
 
+.animated {
+  animation-delay: 0.5s;
+  /* will-change: transform; */
+}
+
 * {
   box-sizing: border-box;
 }
@@ -213,7 +218,7 @@ nav.navigation {
     .active {
       background-color: #e37682;
       color: white !important;
-      transition: 0.5s;
+      /* transition: 0.5s; */
     }
 
 
@@ -395,8 +400,12 @@ section.intro {
   font-size: 30px;
 }
 
+.delay-0s {
+  animation-delay: 0.2s !important;
+}
+
 .delay-1s {
-  animation-delay: 0.3s !important;
+  animation-delay: 0.4s !important;
 }
 
 .delay-2s {
@@ -404,11 +413,7 @@ section.intro {
 }
 
 .delay-3s {
-  animation-delay: 0.9s !important;
-}
-
-.delay-4s {
-  animation-delay: 1.2s !important;
+  animation-delay: 0.8s !important;
 }
 
 .hexa-wrapper {
@@ -781,7 +786,7 @@ section.intro {
 }
 
 .panel-icons {
-  margin: 0;
+  margin: 0 !important;
 }
 
 .work-links-panel a {
@@ -802,7 +807,7 @@ section.intro {
 }
 
 .work-links-panel a:hover {
-  color: rgb(173, 173, 173);
+  color: rgb(48, 48, 48);
 }
 
 
