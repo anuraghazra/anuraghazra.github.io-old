@@ -121,47 +121,57 @@ $(document).ready(function () {
   fetch('/assets/dynamic/works.json')
   .then(res => res.json())
   .then(data => {
-    for (let i = 0; i < data.length; i++) {
+    renderHTML(data);
+    lazyLoadImg();
+    doneDynamic = true;
+    new Animate('.showcase:nth-child(even)', 'fadeInRight', 0).run();
+    new Animate('.showcase:nth-child(odd)', 'fadeInLeft', 0).run();
+  })
+  .catch(err => console.log(err));
+
+  
+  function renderHTML(data) {
+    let dom = document.createElement('section');
+    let str =`
+    ${data.map((d, i) => {
       let pushl5 = '';
       let pulll7 = '';
       if (i % 2) { 
         pushl5 = 'push-l5'
         pulll7 = 'pull-l7';
       }
-      dynamicworks.innerHTML += 
-      `
+      return `
       <figure class="row showcase">
-        <section class="col l7 s12 ${pushl5}">
-          <div class="browser-window">
-            <div class="fake-nav">
-              <i></i><i></i><i></i>
-            </div>
-            <img class="thumbnail" data-src="${data[i].links.image}" alt="${data[i].title}">
+      <section class="col l7 s12 ${ pushl5 }">
+        <div class="browser-window">
+          <div class="fake-nav">
+            <i></i><i></i><i></i>
           </div>
-        </section>
+          <img class="thumbnail" src="" data-src="${d.links.image}" alt="${d.title}">
+        </div>
+      </section>
 
-        <section class="col l5 s12 ${pulll7}">
-          <div class="work-brief">
-            <h2 class="sub-title">${data[i].title}</h2>
-            <p class="pgh-work-info">${data[i].brief}</p>
-            <div class="work-links-panel">
-              <div class="panel-icons row">
-                <a href="https://github.com/anuraghazra"><i class="col s4 fab fa-2x fa-github"></i></a>
-                <a download href="${data[i].links.image}"><i class="col s4 fa fa-2x fa-download"></i></a>
-                <a href="https://github.com/anuraghazra"><i class="col s4 fa fa-2x fa-share"></i></a>
-              </div>
+      <section class="col l5 s12 ${ pulll7 }">
+        <div class="work-brief">
+          <h2 class="sub-title">${d.title}</h2>
+          <p class="pgh-work-info">${d.brief}</p>
+          <div class="work-links-panel">
+            <div class="panel-icons row">
+              <a href="https://github.com/anuraghazra"><i class="col s4 fab fa-2x fa-github"></i></a>
+              <a download href="${d.links.image}"><i class="col s4 fa fa-2x fa-download"></i></a>
+              <a href="https://github.com/anuraghazra"><i class="col s4 fa fa-2x fa-share"></i></a>
             </div>
           </div>
-        </section>
-      </figure>
+        </div>
+      </section>
+    </figure>
       `
-    }
+    }).join('')}
+    `;
 
-    doneDynamic = true;
-    new Animate('.showcase:nth-child(even)', 'fadeInRight', 0).run();
-    new Animate('.showcase:nth-child(odd)', 'fadeInLeft', 0).run();
-  })
-  .catch(err => console.log);
+    dom.innerHTML = str;
+    dynamicworks.appendChild(dom);
+  }
 
   // !
   // ! Lazy Loading 
@@ -169,6 +179,7 @@ $(document).ready(function () {
   // TODO : FIX LazzyLoading
   // LazzyLoading
   lazyLoadImg();
+  
   function lazyLoadImg() {
     let imgs = document.querySelectorAll('img');
     let img = new Image();
@@ -198,7 +209,6 @@ $(document).ready(function () {
     }
   }
 
-
   lazyLoadIframe();
   function lazyLoadIframe() {
     let ifr = document.querySelectorAll('iframe');
@@ -226,10 +236,11 @@ $(document).ready(function () {
     var rect = elm.getBoundingClientRect();
 
     return rect.bottom > 0 &&
-      // rect.right > 0 &&
-      // rect.left < (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */ &&
+      rect.right > 0 &&
+      rect.left < (window.innerWidth || document.documentElement.clientWidth) /* or $(window).width() */ &&
       rect.top < (window.innerHeight || document.documentElement.clientHeight) /* or $(window).height() */;
   }
+
   window.addEventListener('scroll', function () {
     lazyLoadImg();
     lazyLoadIframe();
